@@ -1,2 +1,129 @@
 # api_demo_v2
-API created with Python - FastAPI. Handles conversational sms messaging using Twilio and Rasa.
+
+This API is the result of a hiring exercise.
+
+The purpose of this API is to allow an user to subscribe to updates of the service.
+
+Technologies used:
+
+- Python
+- FastAPI
+- Twilio
+- Rasa
+- MongoDB
+- Docker
+- Docker Compose
+
+# (total hours 9h)
+## Use Case overview
+
+User obtains a token to access to our API
+
+User subscribes to updates of the service using the API, sending the token and a valid phone number.
+
+Server sends a confirmation message to the requested phone number, to validate that the user wants to receive updates from the service.
+
+User confirms to receive updates by sms
+
+Server sends an update after 10s and other after 40s
+
+User unsubscribes
+
+Server sends a confirmation message
+
+
+Phone Number
+
+Send message to phone number
+    -> You have requested to subscribe for updates for our service ABC. 
+    Could you confirm that you want to subscribe for service updates?
+
+    <- Confirmation:
+        Yes,
+        Ok
+        Sure,
+        Alright
+        All right
+        All good
+        good
+        y
+        ye
+        yea
+        yeah
+        I confirm
+        Yes, I confirm
+
+    -> Success! You are now subscribed for updates about our serive.
+
+    -> (After 10s) We have our service ABC unstable. There is already an ongoing team solving the issue. More info soon.
+
+    -> (After 40s) Issue with service ABC fixed. 
+
+## API routes
+
+The API has 3 routes:
+
+- POST /login - Returns a JWT token for interacting with the API.
+- GET /me - Returns the information about the token.
+- GET /run - Initiates a sms conversation with the phone number sent.
+
+For more documentation, read the OpenAPI spec at http://localhost:8080/docs
+
+## Start the API
+
+To start the API you need to execute the following command:
+`make`
+
+That will build the docker images needed by executing docker-compose build and start the API container at the port `8080`
+
+The api will be located at `http://localhost:8080`
+The default user_id is `spicy`
+The default password is `soup`
+
+## Run tests
+
+Unit tests for this project are defined in the backend/app/api/tests folder.
+End to end tests for this project are defined in the backend/app/tests folder.
+
+Warning: *You first need to start the api with docker*
+
+To run the unit tests, run the following command:
+`make test-local`
+
+To run the e2e tests, run the following command:
+`make test-e2e`
+
+## Clean environment
+
+To remove the container and images of this API, run the following commands:  
+
+`make stop`
+
+`make clean`
+
+## Project structure
+
+Files related to application logic are inside the ``backend/app`` directory.
+Application parts are:
+
+```txt
+api
+├── auth                    - auth related deps and routes.
+│   ├── deps                - dependencies for routes with auth.
+│   └── auth                - auth related routes.
+├── core                    - internal API objects.
+│   ├── config.py           - settings for this api.
+│   ├── database.py         - mongodb client and utils.
+│   ├── message_handler.py  - in memory db .
+│   ├── database.py         - in memory db .
+│   ├── rasa_adapter.py     - settings for this api.
+│   └── twilio_adapter.py   - settings for this api.
+├── routes                  - web routes
+│   └── subscriptions.py    - files related routes.
+├── schemas                 - pydantic models for this api.
+├── tests                   - unit tests for this api.
+├── main.py                 - FastAPI application creation.
+└── pre_start.py            - FastAPI application creation.
+```
+
+Files related to the conversational AI are inside the ``rasa`` directory.
