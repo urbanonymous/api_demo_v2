@@ -55,6 +55,7 @@ class MessageHandler:
         
         # TODO: Add a command router and commands to handle the intents from the NLU instead of IFs
         # and be able to track context of commands
+        # TODO: Add a filter for not known users / phone_numbers
         if metadata["intent"]["name"] == "affirm":
             # User wants to subscribe, send 2 mocked events after some time
             

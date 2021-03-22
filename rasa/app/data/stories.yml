@@ -17,14 +17,14 @@ stories:
 - story: sad path 1
   steps:
   - intent: deny
-  - action: utter_greet
+  - action: utter_deny
   - intent: thank_you
   - action: utter_thank_you
 
 - story: sad path 2
   steps:
   - intent: deny
-  - action: utter_greet
+  - action: utter_deny
 
 - story: cancel path 1
   steps:
@@ -39,9 +39,6 @@ stories:
   - action: utter_cancel_subscription
   - intent: thank_you
   - action: utter_thank_you
-  - intent: goodbye
-  - action: utter_goodbye
-
 
 - story: random path 1
   steps:

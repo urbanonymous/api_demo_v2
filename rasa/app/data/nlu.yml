@@ -39,6 +39,7 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - yes, I want to subscribe
     - yess please
     - of course
     - yup
@@ -58,6 +59,8 @@ nlu:
     - never
     - I don't think so
     - don't like that
+    - I dont want to subscribe
+    - No, no subscription please
     - no way
     - not really
     - nope
@@ -67,6 +70,14 @@ nlu:
     - nevermind
     - I dont
     - do not
+
+- intent: cancel_subscription
+  examples: |
+    - please cancel my subscription
+    - i dont want to be subscribed anymore
+    - stop the spam
+    - cancel subscription
+    - end subscription
 
 - intent: thank_you
   examples: |

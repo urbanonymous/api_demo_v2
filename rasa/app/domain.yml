@@ -1,27 +1,39 @@
-version: "2.0"
+version: '2.0'
 
 intents:
   - greet
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
+  - thank_you
   - bot_challenge
+  - out_of_scope
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: 'Hello. How are you?'
+    - text: 'Hi there!'
+
+  utter_goodbye:
+    - text: 'Bye'
 
   utter_affirm:
-  - text: "Success! You are now subscribed for updates about our service"
-  
-  utter_goodbye:
-  - text: "Bye"
+    - text: 'Success! You are now subscribed for updates about our service'
 
-  utter_iamabot:
-  - text: "I am a bot :)"
+  utter_deny:
+    - text: 'All right, no updates for you'
 
+  utter_cancel_subscription:
+    - text: 'Your subscription has been cancelled'
+
+  utter_thank_you:
+    - text: "You're welcome!"
+
+  utter_bot_challenge:
+    - text: 'I am some sort of AI'
+
+  utter_out_of_scope:
+    - text: "Sorry, I'm not sure how to respond to that"
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

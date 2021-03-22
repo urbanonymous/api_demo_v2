@@ -14,7 +14,7 @@ services:
     build:
       context: ./rasa
       dockerfile: Dockerfile
-    command: run --enable-api -m models/20210321-015743.tar.gz
+    command: run --enable-api -m models/20210322-061850.tar.gz
 
   backend:
     image: api_demo_v2-backend:latest

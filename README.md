@@ -51,6 +51,8 @@ The build process takes around 3-5 minutes, as it needs to download all the requ
 
 After that, the containers are going to start, but the API will wait 50s to let Rasa initialize.
 
+Rasa has a model already pretrained! :)
+
 The api will be located at `http://localhost:8080`
 The default username is `spicy`
 The default password is `soup`
