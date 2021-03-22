@@ -25,7 +25,7 @@ Server sends a confirmation message to the requested phone number, to validate t
 
 User confirms to receive updates by sms
 
-Server sends an update after 10s and other after 40s
+Server sends an update after 15s and other after 35s
 
 User unsubscribes
 

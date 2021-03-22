@@ -47,7 +47,8 @@ class MessageListener:
                     if self.ready:
                         message_handler.queue.put(message_data)
 
-            # Indicate that the first iteration was completed
+            # Indicate that the first iteration was completed, ignoring
+            # old messages
             if not self.ready:
                 self.ready = True
 

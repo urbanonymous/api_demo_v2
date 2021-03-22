@@ -27,11 +27,11 @@ class RasaAdapter:
         return a correct responses
         """
         # TODO: Generate some kind of user tracker/session to improve the responses from rasa core
-        metadata = self.client.get(
-            f"{self.base_url}/model/parse", data={"text": message}).json()
+        metadata = self.client.post(
+            f"{self.base_url}/model/parse", json={"text": message}).json()
 
-        response = self.client.get(
-            f"{self.base_url}/webhooks/rest/webhook", data={"sender": user, "message": message}).json()
+        response = self.client.post(
+            f"{self.base_url}/webhooks/rest/webhook", json={"sender": user, "message": message}).json()
 
         return (metadata, response)
 
