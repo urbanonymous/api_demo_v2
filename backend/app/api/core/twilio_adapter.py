@@ -24,7 +24,7 @@ class TwilioAdapter:
 
     def send_message(self, message, target, delay: float = None):
         if delay:
-            self.delayed_messages.append(threading.Timer(5.0, self.send_message, args=[message, target]).start())
+            self.delayed_messages.append(threading.Timer(delay, self.send_message, args=[message, target]).start())
         else:
             message = self.client.messages \
                 .create(
