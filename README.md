@@ -14,7 +14,6 @@ Technologies used:
 - Docker
 - Docker Compose
 
-# (total hours 15h)
 ## Use Case overview
 
 User obtains a token to access to our API
@@ -30,6 +29,7 @@ Server sends an update after 15s and other after 35s
 User unsubscribes
 
 Server sends a confirmation message
+
 ## API routes
 
 The API has 3 routes:
@@ -59,7 +59,7 @@ The default password is `soup`
 
 ## Clean environment
 
-To remove the container and images of this API, run the following commands:  
+To remove the container and images of this API, run the following commands:
 
 `make stop`
 
@@ -67,7 +67,7 @@ To remove the container and images of this API, run the following commands:
 
 ## Project structure
 
-Files related to application logic are inside the ``backend/app`` directory.
+Files related to application logic are inside the `backend/app` directory.
 Application parts are:
 
 ```txt
@@ -78,19 +78,18 @@ api
 ├── core                    - internal API objects.
 │   ├── config.py           - settings for this api.
 │   ├── database.py         - mongodb client and utils.
-│   ├── message_handler.py  - in memory db .
-│   ├── database.py         - in memory db .
-│   ├── rasa_adapter.py     - settings for this api.
-│   └── twilio_adapter.py   - settings for this api.
+│   ├── message_handler.py  - process messages and apply bussiness logic.
+│   ├── message_listener.py - listens to sms from Twilio.
+│   ├── rasa_adapter.py     - connects to rasa and expose helpers.
+│   └── twilio_adapter.py   - connects to twilio and expose helpers.
 ├── routes                  - web routes
-│   └── subscriptions.py    - files related routes.
+│   └── subscriptions.py    - subscriptions related routes.
 ├── schemas                 - pydantic models for this api.
-├── tests                   - unit tests for this api.
 ├── main.py                 - FastAPI application creation.
-└── pre_start.py            - FastAPI application creation.
+└── pre_start.py            - database population.
 ```
 
-Files related to the conversational AI are inside the ``rasa`` directory.
+Files related to the conversational AI are inside the `rasa` directory.
 
 ## TODO
 
