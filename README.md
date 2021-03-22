@@ -14,7 +14,7 @@ Technologies used:
 - Docker
 - Docker Compose
 
-# (total hours 9h)
+# (total hours 15h)
 ## Use Case overview
 
 User obtains a token to access to our API
@@ -30,35 +30,6 @@ Server sends an update after 10s and other after 40s
 User unsubscribes
 
 Server sends a confirmation message
-
-
-Phone Number
-
-Send message to phone number
-    -> You have requested to subscribe for updates for our service ABC. 
-    Could you confirm that you want to subscribe for service updates?
-
-    <- Confirmation:
-        Yes,
-        Ok
-        Sure,
-        Alright
-        All right
-        All good
-        good
-        y
-        ye
-        yea
-        yeah
-        I confirm
-        Yes, I confirm
-
-    -> Success! You are now subscribed for updates about our serive.
-
-    -> (After 10s) We have our service ABC unstable. There is already an ongoing team solving the issue. More info soon.
-
-    -> (After 40s) Issue with service ABC fixed. 
-
 ## API routes
 
 The API has 3 routes:
@@ -76,22 +47,13 @@ To start the API you need to execute the following command:
 
 That will build the docker images needed by executing docker-compose build and start the API container at the port `8080`
 
+The build process takes around 3-5 minutes, as it needs to download all the required software.
+
+After that, the containers are going to start, but the API will wait 50s to let Rasa initialize.
+
 The api will be located at `http://localhost:8080`
-The default user_id is `spicy`
+The default username is `spicy`
 The default password is `soup`
-
-## Run tests
-
-Unit tests for this project are defined in the backend/app/api/tests folder.
-End to end tests for this project are defined in the backend/app/tests folder.
-
-Warning: *You first need to start the api with docker*
-
-To run the unit tests, run the following command:
-`make test-local`
-
-To run the e2e tests, run the following command:
-`make test-e2e`
 
 ## Clean environment
 
@@ -127,3 +89,7 @@ api
 ```
 
 Files related to the conversational AI are inside the ``rasa`` directory.
+
+## TODO
+
+- Implement logging system and connect it with external providers like Sentry

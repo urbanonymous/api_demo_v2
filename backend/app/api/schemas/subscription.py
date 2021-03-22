@@ -3,6 +3,6 @@ from pydantic import BaseModel
 class SubscriptionBase(BaseModel):
     id: str
 
-class Subscription(SubscriptionBase):
+class SubscriptionState(SubscriptionBase):
     state: str
 

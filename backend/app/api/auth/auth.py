@@ -2,7 +2,7 @@ from typing import Any, Union, Optional
 from pydantic import BaseModel
 from datetime import timedelta
 from fastapi import APIRouter, Body, Form, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestFormStrict
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 import uuid
 
@@ -17,7 +17,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 @router.post("/login", response_model=TokenResponse)
-def login(form_data: OAuth2PasswordRequestFormStrict = Depends()):
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Custom auth endpoint to generate access token.
 
@@ -34,7 +34,7 @@ def login(form_data: OAuth2PasswordRequestFormStrict = Depends()):
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires # pylint: disable=no-member
     )
-    return TokenResponse(access_token=access_token)
+    return TokenResponse(access_token=access_token, token_type="Bearer")
 
 
 @router.get("/me", response_model=TokenPayload)

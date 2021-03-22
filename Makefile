@@ -3,14 +3,6 @@
 .PHONY: all
 all: build start
 
-.PHONY: test-local
-test-local:
-	bash ./scripts/test-local.sh
-
-.PHONY: test-e2e
-test-e2e:
-	bash ./scripts/test-e2e.sh
-
 .PHONY: build
 build:
 	bash ./scripts/build.sh
@@ -25,6 +17,9 @@ stop:
 
 .PHONY: clean
 clean:
+	docker rmi mongo
+	docker rmi api_demo_v2-backend
+	docker rmi rasa-engine
 	rm -rf `find . -name __pycache__`
 	rm -f `find . -type f -name '*.py[co]' `
 	rm -f `find . -type f -name '*~' `

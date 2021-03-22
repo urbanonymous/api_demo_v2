@@ -11,7 +11,7 @@ from fastapi.exceptions import HTTPException
 from starlette.status import HTTP_401_UNAUTHORIZED
 from datetime import datetime, timedelta
 
-from api.schemas.token import TokenPayload
+from api.schemas.token import TokenJWTPayload, TokenPayload
 from api.schemas.user import User, UserInDB
 from api.core.database import db
 from api.core.config import settings
@@ -20,7 +20,7 @@ from api.core.database import get_user
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 def verify_password(plain_password, hashed_password):
@@ -31,7 +31,7 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def authenticate_user(username: str, password: str) -> Optional[UserInDB, False]:
+def authenticate_user(username: str, password: str) -> Union[UserInDB, bool]:
     user = get_user(username)
     if not user:
         return False
@@ -47,7 +47,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.utcnow() + timedelta(minutes=15)
     payload.update({"exp": expire})
     # Add default values to the token payload and enforce the schema
-    payload = TokenPayload(**payload)
+    payload = dict(TokenJWTPayload(**payload))
     encoded_jwt = jwt.encode(payload, settings.SECRET_KEY,
                              algorithm=settings.HASHING_ALGORITHM)
     return encoded_jwt
@@ -87,4 +87,4 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     if user is None:
         raise credentials_exception
-    return User(**user)
+    return User(**dict(user))

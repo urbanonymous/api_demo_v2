@@ -16,8 +16,9 @@ jinja2 = "^2.11.2"
 pytest = "^5.4.3"
 python-multipart = "^0.0.5"
 twilio = "^6.54.0"
-python-jose[cryptography]
-passlib[bcrypt]
+python-jose = {extras = ["cryptography"], version ="^3.2.0"}
+passlib = {extras = ["bcrypt"], version ="^1.7.4"}
+pymongo = "^3.11.0"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.782"

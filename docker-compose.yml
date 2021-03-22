@@ -1,18 +1,26 @@
 version: '3.8'
 
 services:
-  mongodb:
+  mongo:
     image: mongo:latest
     volumes:
       - mongodb-data:/var/lib/mongodb/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin_password_1234
-    networks:
-      - api_demo_v2-private
+
+  rasa:
+    image: rasa-engine:latest
+    build:
+      context: ./rasa
+      dockerfile: Dockerfile
+    command: run --enable-api -m models/20210321-015743.tar.gz
 
   backend:
     image: api_demo_v2-backend:latest
+    depends_on:
+      - mongo
+      - rasa
     ports:
       - "8080:80"
     environment:
@@ -21,25 +29,12 @@ services:
       LOG_LEVEL: debug
       MONGO_USERNAME: admin
       MONGO_PASSWORD: admin_password_1234
-    networks:
-      - api_demo_v2-private
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
     build:
       context: ./backend
       dockerfile: Dockerfile
-
-  rasa:
-    image: rasa-engine:latest
-    networks:
-      - api_demo_v2-private
-    build:
-      context: ./rasa
-      dockerfile: Dockerfile
-    command:
-      - run --enable-api -m models/20210321-015743.tar.gz
-
+      
 volumes:
   mongodb-data:
-
-networks:
-  api_demo_v2-private:
-    internal: true

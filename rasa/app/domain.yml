@@ -13,6 +13,9 @@ responses:
   utter_greet:
   - text: "Hey! How are you?"
 
+  utter_affirm:
+  - text: "Success! You are now subscribed for updates about our service"
+  
   utter_goodbye:
   - text: "Bye"
 

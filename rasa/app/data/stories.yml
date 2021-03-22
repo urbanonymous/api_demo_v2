@@ -5,12 +5,12 @@ stories:
 - story: happy path 1
   steps:
   - intent: affirm
-  - action: utter_greet
+  - action: utter_affirm
 
 - story: happy path 2
   steps:
   - intent: affirm
-  - action: utter_greet
+  - action: utter_affirm
   - intent: thank_you
   - action: utter_thank_you
 
