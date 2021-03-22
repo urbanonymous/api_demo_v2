@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
 # Initialize the db
-sleep 50
+sleep 70
 python /app/api/pre_start.py

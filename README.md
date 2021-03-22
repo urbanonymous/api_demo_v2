@@ -49,7 +49,7 @@ That will build the docker images needed by executing docker-compose build and s
 
 The build process takes around 3-5 minutes, as it needs to download all the required software.
 
-After that, the containers are going to start, but the API will wait 50s to let Rasa initialize.
+After that, the containers are going to start, but the API will wait 70s to let Rasa initialize.
 
 Rasa has a model already pretrained! :)
 
